@@ -1,0 +1,52 @@
+---
+- name: Upgrade CPE
+  hosts: arista-pe 
+  connection: local
+  gather_facts: no
+
+  tasks:
+   - name: Configure po1 interfacess
+     eos_config:
+      src: /Users/derrick/ansible-working/jinja/vEOS-3.j2
+      provider: "{{ eos_connection }}"
+      match: none
+      save: yes
+   - pause:
+      seconds: 10
+   - name: install software
+     eos_command: 
+       commands: install source flash:vEOS-lab-4.18.1F.swi now 
+       provider: "{{ eos_connection }}"
+   - pause:
+      seconds: 10
+   - name: reload  
+     eos_command:
+       commands: reload in 1 force 
+       provider: "{{ eos_connection }}"
+
+- name: Leaf 1 MLAG 
+  hosts: veos1  
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Configure Arista Vlans
+    eos_config:
+      src: /Users/derrick/ansible-working/jinja/mlag.j2
+      provider: "{{ eos_connection }}"
+      match: none 
+      save: yes
+
+- name: Leaf 2 MLAG 
+  hosts: veos2
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Configure Arista Vlans
+    eos_config:
+      src: /Users/derrick/ansible-working/jinja/mlag.j2
+      provider: "{{ eos_connection }}"
+      match: none 
+      save: yes
+

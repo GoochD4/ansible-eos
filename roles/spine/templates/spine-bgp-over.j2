@@ -1,0 +1,18 @@
+router bgp {{ as.local }} 
+   neighbor LEAF-EVPN-TRANSIT peer-group 
+   neighbor LEAF-EVPN-TRANSIT fall-over bfd
+   neighbor LEAF-EVPN-TRANSIT send-community
+   neighbor LEAF-EVPN-TRANSIT next-hop-unchanged
+   neighbor LEAF-EVPN-TRANSIT update-source Loopback0
+   neighbor LEAF-EVPN-TRANSIT ebgp-multihop
+   neighbor LEAF-EVPN-TRANSIT send-community extended
+   neighbor LEAF-EVPN-TRANSIT maximum-routes 0
+   {% for neighbor in neighbors %}
+   neighbor {{ neighbor.lo0 }} peer-group LEAF-EVPN-TRANSIT
+   neighbor {{ neighbor.lo0 }} remote-as {{ neighbor.as }}
+   address-family evpn
+   neighbor {{ neighbor.lo0 }} activate
+   address-family ipv4
+   no neighbor {{ neighbor.lo0 }} activate
+   {% endfor %}
+

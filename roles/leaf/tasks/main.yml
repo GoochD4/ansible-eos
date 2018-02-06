@@ -1,0 +1,23 @@
+---
+
+- name: Configure interfaces 
+  eos_config:
+   src: leaf-interfaces.j2
+   provider: "{{ eos_connection }}"
+   match: none
+   save: yes
+
+- name: Configure BGP underlay
+  eos_config:
+   src: leaf-bgp-under.j2
+   provider: "{{ eos_connection }}"
+   match: none
+   save: yes
+
+- name: Configure BGP Overlay
+  eos_config:
+   src: leaf-bgp-over.j2
+   provider: "{{ eos_connection }}"
+   match: none
+   save: yes
+

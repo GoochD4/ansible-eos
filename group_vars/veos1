@@ -1,0 +1,16 @@
+vlans:
+ - vlanid: 10 
+   name: mlag-to-veos3-test 
+   address: 172.16.13.2/24
+   vaddress: 172.16.13.1
+
+enets:
+ - num: 2
+   po: 1
+   
+pos:
+ - id: 1
+
+mlag:
+ id: 1
+

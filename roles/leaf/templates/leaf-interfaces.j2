@@ -1,0 +1,33 @@
+interface loopback0
+ip address {{ lo0.addr }}/32
+!
+interface loopback1
+ip address {{ lo1.addr }}/32
+ip address 99.99.99.99/32 secondary
+!
+{% for int in ints %}
+interface {{ int.id }}
+ip address {{ int.addr }}
+!
+{% endfor %}
+{% for svi in svis %}
+interface {{ svi.id }}
+ip address {{ svi.addr }}
+!
+{% endfor %}
+vlan 4094
+ name MLAG
+ trunk group mlagpeer
+!
+interface port-channel1
+ switchport mode trunk
+ switchport trunk group mlagpeer
+!
+{% for icl in icls %}
+interface {{ icl.id }}
+channel-group {{ icl.chgr }} mode active
+!
+{% endfor %}
+ 
+ 
+

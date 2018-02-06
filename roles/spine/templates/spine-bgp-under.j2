@@ -1,0 +1,18 @@
+router bgp {{ as.local }} 
+   router-id {{ lo0.addr }} 
+   update wait-for-convergence
+   update wait-install
+   maximum-paths 24 ecmp 24
+   {% for tor in tors %}
+   neighbor DC{{ tor.dc }}-RACK{{ tor.num }} peer-group
+   neighbor DC{{ tor.dc }}-RACK{{ tor.num }} remote-as {{ tor.as }} 
+   neighbor DC{{ tor.dc }}-RACK{{ tor.num }} fall-over bfd
+   neighbor DC{{ tor.dc }}-RACK{{ tor.num }} send-community
+   neighbor DC{{ tor.dc }}-RACK{{ tor.num }} maximum-routes 12000
+   {% endfor %}
+   {% for neighbor in neighbors %}
+   neighbor {{ neighbor.intaddr }} peer-group DC{{ neighbor.dc }}-RACK{{ neighbor.tor }}
+   {% endfor %}
+   redistribute connected
+   !
+

@@ -1,0 +1,25 @@
+router bgp {{ as.local }} 
+   router-id {{ lo0.addr }} 
+   update wait-for-convergence
+   update wait-install
+   maximum-paths 4 ecmp 4
+   {% for spine in spines %}
+   neighbor SPINE{{ spine.num }} peer-group
+   neighbor SPINE{{ spine.num }} remote-as {{ spine.as }} 
+   neighbor SPINE{{ spine.num }} fall-over bfd
+   neighbor SPINE{{ spine.num }} send-community
+   neighbor SPINE{{ spine.num }} maximum-routes 12000
+   {% endfor %}
+   neighbor MLAG-PEER peer-group
+   neighbor MLAG-PEER remote-as {{ as.local }}
+   neighbor MLAG-PEER fall-over bfd
+   neighbor MLAG-PEER send-community
+   neighbor MLAG-PEER  maximum-routes 12000
+   !
+   {% for neighbor in neighbors %}
+   neighbor {{ neighbor.intaddr }} peer-group SPINE{{ neighbor.spine }}
+   {% endfor %}
+   neighbor {{ mlag.peer }} peer-group MLAG-PEER
+   redistribute connected
+   !
+

@@ -13,6 +13,11 @@ router bgp {{ as.local }}
    neighbor {{ neighbor.lo0 }} peer-group SPINE-EVPN-TRANSIT
    neighbor {{ neighbor.lo0 }} remote-as {{ neighbor.as }}
    {% endfor %}
-   redistribute connected
+   !
+   address-family evpn
+   neighbor SPINE-EVPN-TRANSIT activate
+   !
+   address-family ipv4
+   no neighbor SPINE-EVPN-TRANSIT activate
    !
 

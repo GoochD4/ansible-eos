@@ -12,9 +12,11 @@ router bgp {{ as.local }}
    {% for neighbor in neighbors %}
    neighbor {{ neighbor.lo0 }} peer-group LEAF-EVPN-TRANSIT
    neighbor {{ neighbor.lo0 }} remote-as {{ neighbor.as }}
-   address-family evpn
-   neighbor {{ neighbor.lo0 }} activate
-   address-family ipv4
-   no neighbor {{ neighbor.lo0 }} activate
    {% endfor %}
-
+   !
+   address-family evpn
+   neighbor LEAF-EVPN-TRANSIT activate
+   !
+   address-family ipv4
+   no neighbor LEAF-EVPN-TRANSIT activate
+   !

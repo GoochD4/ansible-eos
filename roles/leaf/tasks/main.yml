@@ -21,3 +21,10 @@
    match: none
    save: yes
 
+- name: Configure mlag
+  eos_config:
+   src: leaf-mlag.j2
+   provider: "{{ eos_connection }}"
+   match: none
+   save: yes
+

@@ -1,25 +1,10 @@
-{% for vlan in vlans %}
-vlan {{vlan.vlanid }}
-  name {{ vlan.name }}
-interface vlan {{vlan.vlanid }}
-  ip address {{ vlan.address }}
-  ip virtual-router address {{ vlan.vaddress }}
-{% endfor %}
-
-{% for enet in enets %}
-interface Ethernet{{ enet.num }}
-  channel-group {{ enet.po }} mode active
-{% endfor %}
-
-{% for po in pos %}
-interface Port-Channel {{ po.id }}
- {% for vlan in vlans %}
-  switchport trunk allowed vlan {{ vlan.vlanid }}
- {% endfor %}
-  switchport mode trunk
-  mlag {{ mlag.id }}
-{% endfor %}
- 
-
-
-
+mlag configuration
+   domain-id {{ mlag.domain }}
+   local-interface Vlan4094
+   peer-address {{ mlag.peer }} 
+   peer-link Port-Channel1
+   reload-delay mlag 300
+   reload-delay non-mlag 360
+   reload-delay mode lacp standby
+!
+ip virtual-router mac-address aa:bb:cc:dd:11:22

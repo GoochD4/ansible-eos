@@ -1,7 +1,7 @@
 lo0:
- addr: 192.168.1.1 
+ addr: 192.168.1.2 
 as:
- local: 65001
+ local: 65002
 
 tors:
  - num: 1
@@ -16,42 +16,52 @@ tors:
 
 neighbors:
  - neighborid: LEAF1
-   intaddr: 172.1.11.2
+   intaddr: 172.16.21.2
    lo0: 192.168.2.1 
    dc: 1
    tor: 1 
    as: 65101
  - neighborid: LEAF2
-   intaddr: 172.1.12.2
+   intaddr: 172.16.22.2
    lo0: 192.168.2.2 
    dc: 1
    tor: 1
    as: 65101
  - neighborid: LEAF3
-   intaddr: 172.1.13.2
+   intaddr: 172.16.23.2
    lo0: 192.168.2.3
    dc: 1
    tor: 2
    as: 65102
  - neighborid: LEAF4
-   intaddr: 172.1.14.2
+   intaddr: 172.16.24.2
    lo0: 192.168.2.4 
    dc: 1
    tor: 2
    as: 65102
  - neighborid: LEAF5
-   intaddr: 172.1.15.2
+   intaddr: 172.16.25.2
    lo0: 192.168.2.5
    dc: 1
    tor: 3
    as: 65103
  - neighborid: LEAF6
-   intaddr: 172.1.16.2
+   intaddr: 172.16.26.2
    lo0: 192.168.2.6
    dc: 1
    tor: 3
    as: 65103
 
 ints:
- - id: ethernet1
-   addr: 172.16.11.1/30
+ - id: ethernet3/1/1
+   addr: 172.16.21.1/30
+ - id: ethernet3/2/1
+   addr: 172.16.22.1/30
+ - id: ethernet3/3/1
+   addr: 172.16.23.1/30
+ - id: ethernet3/4/1
+   addr: 172.16.24.1/30
+ - id: ethernet3/5/1
+   addr: 172.16.25.1/30
+ - id: ethernet3/6/1
+   addr: 172.16.26.1/30

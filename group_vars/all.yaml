@@ -1,7 +1,7 @@
 eos_connection:
   host: "{{ inventory_hostname }}"
-  username: ansible 
-  password: ansible123
+  username: admin 
+  password: WWTwwt1! 
   transport: eapi
   use_ssl: yes 
   validate_certs: no

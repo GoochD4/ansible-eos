@@ -1,0 +1,48 @@
+lo0:
+ addr: 192.168.2.5
+
+lo1:
+ addr: 3.3.3.3
+
+as:
+ local: 65103
+
+spines:
+ - num: 1
+   dc: 1
+   as: 65001
+ - num: 2
+   dc: 1
+   as: 65002
+
+neighbors:
+ - neighborid: SPINE1
+   intaddr: 172.16.15.1
+   lo0: 192.168.1.1 
+   spine: 1
+   as: 65001
+ - neighborid: SPINE2
+   intaddr: 172.16.25.1
+   lo0: 192.168.1.2
+   spine: 2
+   as: 65002
+
+mlag:
+  peer: 172.16.94.10
+  domain: DC1-RACK3
+ints:
+ - id: ethernet49/1
+   addr: 172.16.15.2/30
+ - id: ethernet50/1
+   addr: 172.16.25.2/30
+
+svis:
+ - id: vlan4094
+   addr: 172.16.94.9/30
+
+icls:
+ - id: ethernet53/1
+   chgr: 1
+ - id: ethernet54/1
+   chgr: 1
+

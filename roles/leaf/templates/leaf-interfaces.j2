@@ -8,6 +8,7 @@ ip address 99.99.99.99/32 secondary
 {% for int in ints %}
 interface {{ int.id }}
 ip address {{ int.addr }}
+no switchport
 !
 {% endfor %}
 {% for svi in svis %}

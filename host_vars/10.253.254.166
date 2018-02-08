@@ -1,5 +1,5 @@
 lo0:
- addr: 192.168.2.1
+ addr: 192.168.2.2
 
 lo1:
  addr: 1.1.1.1 
@@ -17,29 +17,33 @@ spines:
 
 neighbors:
  - neighborid: SPINE1
-   intaddr: 172.16.11.1
-   lo0: 192.168.1.1 
+   intaddr: 172.16.12.1
+   lo0: 192.168.1.1
    spine: 1
    as: 65001
  - neighborid: SPINE2
-   intaddr: 172.16.21.1
+   intaddr: 172.16.22.1
    lo0: 192.168.1.2
    spine: 2
    as: 65002
 
 mlag:
-  peer: 172.16.94.2
+  peer: 172.16.94.1
   domain: DC1-RACK1
 
 ints:
- - id: ethernet1
-   addr: 172.16.11.2/30
+ - id: ethernet49/1
+   addr: 172.16.12.2/30
+ - id: ethernet50/1
+   addr: 172.16.22.2/30
 
 svis:
  - id: vlan4094
-   addr: 172.16.94.1/30
+   addr: 172.16.94.2/30
 
 icls:
- - id: ethernet2
+ - id: ethernet53/1
+   chgr: 1
+ - id: ethernet54/1
    chgr: 1
 

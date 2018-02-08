@@ -4,6 +4,7 @@ ip address {{ lo0.addr }}/32
 {% for int in ints %}
 interface {{ int.id }}
 ip address {{ int.addr }}
+no switchport
 {% endfor %}
 !
  
